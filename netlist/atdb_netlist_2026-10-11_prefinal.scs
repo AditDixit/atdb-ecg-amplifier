@@ -1,0 +1,182 @@
+// Generated for: spectre
+// Generated on: Oct 11 14:38:50 2026
+// Design library name: atdb_ota_lib
+// Design cell name: atdb_ota_stage1
+// Design view name: schematic
+simulator lang=spectre
+global 0
+parameters Ibias=5n
+include "/home/buet/cadence/gpdk090_v4.6/libs.oa22/gpdk090/../../models/spectre/gpdk090.scs" section=NN
+
+// Library name: atdb_ota_lib
+// Cell name: Venvelope_test
+// View name: schematic
+subckt Venvelope_test Venvelope Vin_Detector
+    M0 (Vdiff Vdiff Venvelope 0) gpdk090_nmos2v w=(22u) l=500n as=6.6p \
+        ad=6.6p ps=44.6u pd=44.6u m=(1)*(1) simM=(1)*(1)
+    Rdiff (Vdiff net11) resistor r=1G
+    R0 (Venvelope 0) resistor r=300M
+    Cdiff (Vin_Detector Vdiff) capacitor c=32p
+    C0 (Venvelope 0) capacitor c=330f
+    V0 (net11 0) vsource dc=450.00m type=dc
+ends Venvelope_test
+// End of subcircuit definition.
+
+// Library name: atdb_ota_lib
+// Cell name: amp_ckt
+// View name: schematic
+subckt amp_ckt Vboost Vbp1 Vdd Venvelope_in
+    M0 (Vboost net9 0 0) gpdk090_nmos2v w=(2.21u) l=1u as=663f ad=663f \
+        ps=5.02u pd=5.02u m=(1)*(1) simM=(1)*(1)
+    M1 (Vboost Vbp1 Vdd Vdd) gpdk090_pmos2v w=(150n) l=1u as=72.6f \
+        ad=72.6f ps=1.16u pd=1.16u m=(1)*(1) simM=(1)*(1)
+    C1 (net9 Vboost) capacitor c=450f
+    C0 (Venvelope_in net9) capacitor c=10p
+    R0 (net9 Vboost) resistor r=100G
+ends amp_ckt
+// End of subcircuit definition.
+
+// Library name: atdb_ota_lib
+// Cell name: injection_testbench
+// View name: schematic
+subckt injection_testbench Vboost Vdd Vinj_Out
+    V0 (net02 0) vsource dc=1.6 type=dc
+    M0 (net7 net02 Vdd Vdd) gpdk090_pmos2v w=(5.5u) l=500n as=1.65p \
+        ad=1.65p ps=11.6u pd=11.6u m=(1)*(1) simM=(1)*(1)
+    M1 (Vinj_Out Vboost net7 Vdd) gpdk090_pmos2v w=(150n) l=2u as=72.6f \
+        ad=72.6f ps=1.16u pd=1.16u m=(1)*(1) simM=(1)*(1)
+ends injection_testbench
+// End of subcircuit definition.
+
+// Library name: atdb_ota_lib
+// Cell name: atdb_ota_stage1
+// View name: schematic
+M38 (Vinp Vinp net0117 Voutn) gpdk090_pmos2v w=(150n) l=4u as=72.6f \
+        ad=72.6f ps=1.16u pd=1.16u m=(1)*(1) simM=(1)*(1)
+MB11 (Vbp2 net042 net06 net06) gpdk090_pmos2v w=(710n) l=500n as=213f \
+        ad=213f ps=2.02u pd=2.02u m=(1)*(1) simM=(1)*(1)
+MB6 (Vbn2 Vbp1 net06 net06) gpdk090_pmos2v w=(450n) l=500n as=135f ad=135f \
+        ps=1.5u pd=1.5u m=(1)*(1) simM=(1)*(1)
+MB5 (Vbp1 Vbp1 net06 net06) gpdk090_pmos2v w=(450n) l=500n as=135f ad=135f \
+        ps=1.5u pd=1.5u m=(1)*(1) simM=(1)*(1)
+MB12 (net082 Vbp2 net042 net06) gpdk090_pmos2v w=(1.42u) l=500n as=426f \
+        ad=426f ps=3.44u pd=3.44u m=(1)*(1) simM=(1)*(1)
+M37 (Vinn Vinn net0118 Voutp) gpdk090_pmos2v w=(150n) l=4u as=72.6f \
+        ad=72.6f ps=1.16u pd=1.16u m=(1)*(1) simM=(1)*(1)
+Mc0 (net071 Vbp1 net06 net06) gpdk090_pmos2v w=(910n) l=500n as=273f \
+        ad=273f ps=2.42u pd=2.42u m=(1)*(1) simM=(1)*(1)
+Mc1 (Vcmfb net03 net071 net06) gpdk090_pmos2v w=(450n) l=500n as=135f \
+        ad=135f ps=1.5u pd=1.5u m=(1)*(1) simM=(1)*(1)
+M39 (net0117 net0117 Voutn Voutn) gpdk090_pmos2v w=(150n) l=4u as=72.6f \
+        ad=72.6f ps=1.16u pd=1.16u m=(1)*(1) simM=(1)*(1)
+M36 (net0118 net0118 Voutp Voutp) gpdk090_pmos2v w=(150n) l=4u as=72.6f \
+        ad=72.6f ps=1.16u pd=1.16u m=(1)*(1) simM=(1)*(1)
+Mc2 (net059 net038 net071 net06) gpdk090_pmos2v w=(450n) l=500n as=135f \
+        ad=135f ps=1.5u pd=1.5u m=(1)*(1) simM=(1)*(1)
+MB9 (net079 net079 net06 net06) gpdk090_pmos2v w=(450n) l=500n as=135f \
+        ad=135f ps=1.5u pd=1.5u m=(1)*(1) simM=(1)*(1)
+MB10 (net042 Vbp1 net06 net06) gpdk090_pmos2v w=(450n) l=500n as=135f \
+        ad=135f ps=1.5u pd=1.5u m=(1)*(1) simM=(1)*(1)
+m0 (net18 Vbp1 net06 net06) gpdk090_pmos2v w=(5.43u) l=500n as=1.629p \
+        ad=1.629p ps=11.46u pd=11.46u m=(1)*(1) simM=(1)*(1)
+m1 (A Vinp net18 net06) gpdk090_pmos2v w=(2.72u) l=500n as=816f ad=816f \
+        ps=6.04u pd=6.04u m=(1)*(1) simM=(1)*(1)
+m2 (B Vinn net18 net06) gpdk090_pmos2v w=(2.72u) l=500n as=816f ad=816f \
+        ps=6.04u pd=6.04u m=(1)*(1) simM=(1)*(1)
+m5 (C Vbp2 A net06) gpdk090_pmos2v w=(450n) l=500n as=135f ad=135f ps=1.5u \
+        pd=1.5u m=(1)*(1) simM=(1)*(1)
+m6 (D Vbp2 B net06) gpdk090_pmos2v w=(450n) l=500n as=135f ad=135f ps=1.5u \
+        pd=1.5u m=(1)*(1) simM=(1)*(1)
+m10 (Voutn B net06 net06) gpdk090_pmos2v w=(4.42u) l=500n as=1.326p \
+        ad=1.326p ps=9.44u pd=9.44u m=(1)*(1) simM=(1)*(1)
+m9 (Voutp A net06 net06) gpdk090_pmos2v w=(4.42u) l=500n as=1.326p \
+        ad=1.326p ps=9.44u pd=9.44u m=(1)*(1) simM=(1)*(1)
+M26 (Vmid1 Vg1 0 0) gpdk090_nmos2v w=(4.43u) l=500n as=1.329p ad=1.329p \
+        ps=9.46u pd=9.46u m=(1)*(1) simM=(1)*(1)
+MB1 (net0146 net0146 Vbn1 0) gpdk090_nmos2v w=(2.21u) l=500n as=663f \
+        ad=663f ps=5.02u pd=5.02u m=(1)*(1) simM=(1)*(1)
+MB8 (net079 Vbn2 net0100 0) gpdk090_nmos2v w=(1.1u) l=500n as=330f ad=330f \
+        ps=2.8u pd=2.8u m=(1)*(1) simM=(1)*(1)
+MB3 (Vbp1 net0146 net085 0) gpdk090_nmos2v w=(2.21u) l=500n as=663f \
+        ad=663f ps=5.02u pd=5.02u m=(1)*(1) simM=(1)*(1)
+MB4 (net085 Vbn1 0 0) gpdk090_nmos2v w=(2.21u) l=500n as=663f ad=663f \
+        ps=5.02u pd=5.02u m=(1)*(1) simM=(1)*(1)
+MB13 (net0100 Vbn1 0 0) gpdk090_nmos2v w=(2.21u) l=500n as=663f ad=663f \
+        ps=5.02u pd=5.02u m=(1)*(1) simM=(1)*(1)
+MB7 (Vbn2 net0100 0 0) gpdk090_nmos2v w=(2.21u) l=500n as=663f ad=663f \
+        ps=5.02u pd=5.02u m=(1)*(1) simM=(1)*(1)
+MB2 (Vbn1 Vbn1 0 0) gpdk090_nmos2v w=(2.21u) l=500n as=663f ad=663f \
+        ps=5.02u pd=5.02u m=(1)*(1) simM=(1)*(1)
+MB14 (Vbp2 Vbn1 0 0) gpdk090_nmos2v w=(2.21u) l=500n as=663f ad=663f \
+        ps=5.02u pd=5.02u m=(1)*(1) simM=(1)*(1)
+MB15 (net082 net082 0 0) gpdk090_nmos2v w=(2.21u) l=500n as=663f ad=663f \
+        ps=5.02u pd=5.02u m=(1)*(1) simM=(1)*(1)
+Mc4 (net059 Vcmfb 0 0) gpdk090_nmos2v w=(2.21u) l=500n as=663f ad=663f \
+        ps=5.02u pd=5.02u m=(1)*(1) simM=(1)*(1)
+Mc3 (Vcmfb Vcmfb 0 0) gpdk090_nmos2v w=(2.21u) l=500n as=663f ad=663f \
+        ps=5.02u pd=5.02u m=(1)*(1) simM=(1)*(1)
+m7 (A Vbn2 C 0) gpdk090_nmos2v w=(2.21u) l=500n as=663f ad=663f ps=5.02u \
+        pd=5.02u m=(1)*(1) simM=(1)*(1)
+m8 (B Vbn2 D 0) gpdk090_nmos2v w=(2.21u) l=500n as=663f ad=663f ps=5.02u \
+        pd=5.02u m=(1)*(1) simM=(1)*(1)
+m3 (C Vinp net17 0) gpdk090_nmos2v w=(13.29u) l=500n as=3.987p ad=3.987p \
+        ps=27.18u pd=27.18u m=(1)*(1) simM=(1)*(1)
+m4 (D Vinn net17 0) gpdk090_nmos2v w=(13.29u) l=500n as=3.987p ad=3.987p \
+        ps=27.18u pd=27.18u m=(1)*(1) simM=(1)*(1)
+m13 (net17 Vcmfb 0 0) gpdk090_nmos2v w=(26.52u) l=500n as=7.956p ad=7.956p \
+        ps=53.64u pd=53.64u m=(1)*(1) simM=(1)*(1)
+m12 (Voutn D 0 0) gpdk090_nmos2v w=(21.6u) l=500n as=6.48p ad=6.48p \
+        ps=43.8u pd=43.8u m=(1)*(1) simM=(1)*(1)
+m11 (Voutp C 0 0) gpdk090_nmos2v w=(21.6u) l=500n as=6.48p ad=6.48p \
+        ps=43.8u pd=43.8u m=(1)*(1) simM=(1)*(1)
+V22 (net0109 0) vsource dc=1.67 type=dc
+V12 (net038 0) vsource dc=1 type=dc
+V0 (net06 0) vsource dc=2 type=dc
+I31 (Venvelope Vmid1) Venvelope_test
+I29 (net06 net0146) isource dc=Ibias type=dc
+C19 (net0107 net0108) capacitor c=10p
+Cin1 (Voutn Vg1) capacitor c=100p
+C13 (Vinn net0151) capacitor c=40p
+C11 (Voutn Vinp) capacitor c=400f
+C10 (Voutp Vinn) capacitor c=400f
+C12 (Vinp net0159) capacitor c=40p
+C3 (B net39) capacitor c=2p
+C2 (D net40) capacitor c=2p
+C1 (C net37) capacitor c=2p
+C0 (A net38) capacitor c=2p
+R19 (net0108 net0109) resistor r=100G
+RD1 (net06 Vmid1) resistor r=100M
+R2Bias (Vg1 0) resistor r=180M
+R1bias (net06 Vg1) resistor r=1G
+R7 (Voutn net03) resistor r=1G
+R8 (net03 Voutp) resistor r=1G
+R3 (net37 Voutp) resistor r=1M
+R2 (net38 Voutp) resistor r=1M
+R1 (Voutn net39) resistor r=1M
+R0 (Voutn net40) resistor r=1M
+I32 (net0107 Vbp1 net06 Venvelope) amp_ckt
+I33 (net0108 net06 0) injection_testbench
+V2 (net0151 0) vsource type=pwl wave=[ 0 1 20m 1 70m 998.5m 120m 1 170m 1 \
+        185m 995m 200m 1 820m 1 870m 998.5m 920m 1 970m 1 985m 995m 1 1 \
+        1.62 1 1.67 998.5m 1.72 1 1.77 1 1.785 995m 1.8 1 2.42 1 2.47 \
+        998.5m 2.52 1 2.57 1 2.585 995m 2.6 1 3.2 1 ]
+V9 (net0159 0) vsource type=pwl wave=[ 0 1 20m 1 70m 1.0015 120m 1 170m 1 \
+        185m 1.005 200m 1 820m 1 870m 1.0015 920m 1 970m 1 985m 1.005 1 1 \
+        1.62 1 1.67 1.0015 1.72 1 1.77 1 1.785 1.005 1.8 1 2.42 1 2.47 \
+        1.0015 2.52 1 2.57 1 2.585 1.005 2.6 1 3.2 1 ]
+nodeset net18=1.6 net17=0.4 B=1.2 A=1.2 C=0.5 D=0.5 Voutp=1 Voutn=1 \
+    Vcmfb=0.35 
+simulatorOptions options reltol=1e-3 vabstol=1e-6 iabstol=1e-12 temp=27 \
+    tnom=27 scalem=1.0 scale=1.0 gmin=1e-12 rforce=1 maxnotes=5 maxwarns=5 \
+    digits=5 cols=80 pivrel=1e-3 sensfile="../psf/sens.output" \
+    checklimitdest=psf 
+noise ( Voutp Voutn ) noise start=0.1 stop=10k dec=20 iprobe=V9 \
+    annotate=status 
+modelParameter info what=models where=rawfile
+element info what=inst where=rawfile
+outputParameter info what=output where=rawfile
+designParamVals info what=parameters where=rawfile
+primitives info what=primitives where=rawfile
+subckts info what=subckts  where=rawfile
+save V0:p MB1:d Voutp Voutn R19:1 R19:1 
+saveOptions options save=selected
