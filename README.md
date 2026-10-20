@@ -1,7 +1,6 @@
 # Activity-Triggered Dynamic Bias (ATDB) ECG Amplifier
 
-> **CONFIDENTIAL — keep this repository PRIVATE until the patent application is filed.**
-> Making it public counts as public disclosure and can invalidate the patent.
+
 
 A nanowatt-level, inverter-based, current-reused ECG amplifier whose bias current rises only during the QRS complex. A fully analog loop senses the slope of the amplifier's own output and injects a bounded current into the single bias reference that every amplifier branch mirrors.
 
