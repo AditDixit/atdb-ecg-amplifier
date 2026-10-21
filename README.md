@@ -44,13 +44,6 @@ netlist/   Spectre netlist (11 Oct 2026, BEFORE final tuning; see note)
 scripts/   Python used to plot the charts and build the report and poster
 ```
 
-## Notes and limitations
-
-- `netlist/` holds the 11 Oct 2026 export, before the final values above (RD1, Vinj, input-pair size) were set. Replace it with a fresh export of the final schematic.
-- AC (gain/bandwidth) and the flat-input check were simulated before the input pair was enlarged.
-- Noise at rest is higher than state-of-the-art low-noise amplifiers (NEF ≈ 18). The cause is current spent in branches that do not set noise; redistributing current toward the input pair is the planned fix.
-- Weak at the SS and FS process corners; a replica bias or trim is the planned fix.
-- The scripts use absolute paths from the original working environment; adjust before running.
 
 ## Status
 
